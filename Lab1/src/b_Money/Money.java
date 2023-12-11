@@ -18,8 +18,8 @@ public class Money implements Comparable {
 	 * Return the amount of money.
 	 * @return Amount of money in Double type.
 	 */
-	public Integer getAmount() {
-		return this.amount;
+	public Double getAmount() {
+		return ((double) this.amount);
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class Money implements Comparable {
 	 * @return The value of the Money in the "universal currency".
 	 */
 	public Integer universalValue() {
-		return (int) (this.getAmount()*this.getCurrency().getRate());
+		return currency.universalValue(amount);
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class Money implements Comparable {
 	 * @return A new instance of the money class initialized with the new negated money amount.
 	 */
 	public Money negate() {
-		return new Money(this.getAmount()*(-1), this.getCurrency());
+		return new Money(-this.amount, this.getCurrency());
 	}
 
 	/**

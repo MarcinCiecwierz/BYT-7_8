@@ -23,6 +23,7 @@ public class MoneyTest {
 		SEKn100 = new Money(-10000, SEK);
 	}
 
+	//Test if getAmount is ok.
 	@Test
 	public void testGetAmount() {
 		assertEquals(10000, SEK100.getAmount(), 0);
@@ -30,6 +31,7 @@ public class MoneyTest {
 		assertEquals(-10000, SEKn100.getAmount(), 0);
 	}
 
+	//Test if getCurrency is ok.
 	@Test
 	public void testGetCurrency() {
 		assertEquals(0.15, SEK100.getCurrency().getRate(), 0);
@@ -37,6 +39,7 @@ public class MoneyTest {
 		assertEquals(0.15, SEKn100.getCurrency().getRate(), 0);
 	}
 
+	//Test if toString is ok.
 	@Test
 	public void testToString() {
 		assertEquals("20.0 EUR", EUR20.toString());
@@ -44,6 +47,7 @@ public class MoneyTest {
 		assertEquals("-100.0 SEK", SEKn100.toString());
 	}
 
+	//Test if globalValue is ok.
 	@Test
 	public void testGlobalValue() {
 		assertEquals(1500, SEK100.universalValue(), 0);
@@ -51,12 +55,14 @@ public class MoneyTest {
 		assertEquals(-1500, SEKn100.universalValue(), 0);
 	}
 
+	//Test if equalsMoney is ok.
 	@Test
 	public void testEqualsMoney() {
 		assertTrue("true", EUR0.equals(SEK0));
 		assertFalse("false", EUR10.equals(SEKn100));
 	}
 
+	//Test if add is ok.
 	@Test
 	public void testAdd() {
 		assertEquals(20000, SEK100.add(EUR10).getAmount(), 0);
@@ -64,6 +70,7 @@ public class MoneyTest {
 		assertEquals(10000, SEKn100.add(EUR20).getAmount(), 0);
 	}
 
+	//Test if sub is ok.
 	@Test
 	public void testSub() {
 		assertEquals(0, SEK100.sub(EUR10).getAmount(), 0);
@@ -71,18 +78,21 @@ public class MoneyTest {
 		assertEquals(-30000, SEKn100.sub(EUR20).getAmount(), 0);
 	}
 
+	//Test if isZero is ok.
 	@Test
 	public void testIsZero() {
 		assertTrue("True", EUR0.isZero());
 		assertFalse("False", EUR10.isZero());
 	}
 
+	//Test if negate is ok.
 	@Test
 	public void testNegate() {
 		assertEquals(-1000, EUR10.negate().getAmount(), 0);
 		assertEquals(-10000, SEK100.negate().getAmount(), 0);
 	}
 
+	//Test if compareTo is ok.
 	@Test
 	public void testCompareTo() {
 		assertEquals(0, EUR0.compareTo(SEK0));

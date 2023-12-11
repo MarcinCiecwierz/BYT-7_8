@@ -45,6 +45,7 @@ public class Bank {
 		else {
 			//this does not make sense, because we want to create new account
 			//and here is used method get that will not add it to list
+			//I found it when opened one account and then next same account and it did not throw AccountExistsException()
 //			accountlist.get(accountid);
 			accountlist.put(accountid, new Account(accountid, this.getCurrency()));
 		}
@@ -81,6 +82,7 @@ public class Bank {
 		else {
 			Account account = accountlist.get(accountid);
 			//we should withdraw not deposit
+			//noticed it when at test it would add money instead of withdrawing it.
 //			account.deposit(money);
 			account.withdraw(money);
 		}
@@ -92,7 +94,9 @@ public class Bank {
 	 * @return Balance of the account
 	 * @throws AccountDoesNotExistException If the account does not exist
 	 */
-	public Integer getBalance(String accountid) throws AccountDoesNotExistException {
+
+	//openAccount method was bugged after fixing it
+	public Double getBalance(String accountid) throws AccountDoesNotExistException {
 		if (!accountlist.containsKey(accountid)) {
 			throw new AccountDoesNotExistException();
 		}
@@ -109,6 +113,8 @@ public class Bank {
 	 * @param amount Amount of Money to transfer
 	 * @throws AccountDoesNotExistException If one of the accounts do not exist
 	 */
+
+	//openAccount method was bugged after fixing it is ok.
 	public void transfer(String fromaccount, Bank tobank, String toaccount, Money amount) throws AccountDoesNotExistException {
 		if (!accountlist.containsKey(fromaccount) || !tobank.accountlist.containsKey(toaccount)) {
 			throw new AccountDoesNotExistException();
@@ -144,6 +150,8 @@ public class Bank {
 	 * @param tobank Bank where receiving account resides
 	 * @param toaccount Id of receiving account
 	 */
+
+	//openAccount method was bugged after fixing it
 	public void addTimedPayment(String accountid, String payid, Integer interval, Integer next, Money amount, Bank tobank, String toaccount) {
 		Account account = accountlist.get(accountid);
 		account.addTimedPayment(payid, interval, next, amount, tobank, toaccount);
@@ -154,6 +162,8 @@ public class Bank {
 	 * @param accountid Id of account to remove timed payment from
 	 * @param id Id of timed payment
 	 */
+
+	//openAccount method was bugged after fixing it
 	public void removeTimedPayment(String accountid, String id) {
 		Account account = accountlist.get(accountid);
 		account.removeTimedPayment(id);

@@ -22,6 +22,7 @@ public class BankTest {
 		DanskeBank.openAccount("Gertrud");
 	}
 
+	//Test if getName is ok.
 	@Test
 	public void testGetName() {
 		assertEquals("SweBank", SweBank.getName());
@@ -29,6 +30,7 @@ public class BankTest {
 		assertEquals("DanskeBank", DanskeBank.getName());
 	}
 
+	//Test if getCurrency is ok.
 	@Test
 	public void testGetCurrency() {
 		assertSame(SEK, SweBank.getCurrency());
@@ -36,11 +38,15 @@ public class BankTest {
 		assertSame(DKK, DanskeBank.getCurrency());
 	}
 
+	//Test if openCurrency is ok.
+	//Failed, did not throw exception when account existed.
 	@Test
 	public void testOpenAccount() throws AccountExistsException, AccountDoesNotExistException {
 		assertThrows(AccountExistsException.class, () -> SweBank.openAccount("Bob"));
 	}
 
+	//Test if deposit is ok.
+	//Failed, NullPointerException
 	@Test
 	public void testDeposit() throws AccountDoesNotExistException {
 		assertThrows(AccountDoesNotExistException.class, () ->
@@ -50,6 +56,8 @@ public class BankTest {
 		assertEquals(43200, SweBank.getBalance("Bob"), 0);
 	}
 
+	//Test if withdraw is ok.
+	//Failed, AccountDoesNotExistsException
 	@Test
 	public void testWithdraw() throws AccountDoesNotExistException {
 		assertThrows(AccountDoesNotExistException.class, ()
@@ -59,6 +67,8 @@ public class BankTest {
 		assertEquals(-1000, SweBank.getBalance("Bob"), 0);
 	}
 
+	//Test if getBalance is ok.
+	//Failed, AccountDoesNotExistsException
 	@Test
 	public void testGetBalance() throws AccountDoesNotExistException {
 		assertThrows(AccountDoesNotExistException.class, ()
@@ -67,6 +77,8 @@ public class BankTest {
 		assertEquals(0, SweBank.getBalance("Bob"), 0);
 	}
 
+	//Test if transfer is ok.
+	//Failed, AccountDoesNotExistsException
 	@Test
 	public void testTransfer() throws AccountDoesNotExistException {
 		assertThrows(AccountDoesNotExistException.class, ()
@@ -80,10 +92,13 @@ public class BankTest {
 		assertEquals(1000, Nordea.getBalance("Bob"), 0);
 	}
 
+	//Test is timedPayment is ok.
+	//Failed, NullPointerException
 	@Test
 	public void testTimedPayment() throws AccountDoesNotExistException {
 		SweBank.addTimedPayment("Ulrika", "2", 1, 1, new Money(10000, SEK),
 				Nordea, "Bob");
+		SweBank.tick();
 		SweBank.tick();
 		assertEquals(10000, Nordea.getBalance("Bob"), 0);
 		SweBank.removeTimedPayment("Ulrika", "2");

@@ -16,6 +16,7 @@ public class CurrencyTest {
 		EUR = new Currency("EUR", 1.5);
 	}
 
+	//Test if getName is ok.
 	@Test
 	public void testGetName() {
 		assertEquals("SEK", SEK.getName());
@@ -23,6 +24,7 @@ public class CurrencyTest {
 		assertEquals("EUR", EUR.getName());
 	}
 
+	//Test if getRate is ok.
 	@Test
 	public void testGetRate() {
 		assertEquals(0.15, SEK.getRate(), 0);
@@ -30,6 +32,7 @@ public class CurrencyTest {
 		assertEquals(1.5, EUR.getRate(), 0);
 	}
 
+	//Test if setRate is ok.
 	@Test
 	public void testSetRate() {
 		SEK.setRate(0.20);
@@ -40,6 +43,7 @@ public class CurrencyTest {
 		assertEquals(0.18, EUR.getRate(), 0);
 	}
 
+	//Test if globalValue is ok.
 	@Test
 	public void testGlobalValue() {
 		assertEquals(15, SEK.universalValue(100), 0);
@@ -47,6 +51,7 @@ public class CurrencyTest {
 		assertEquals(150, EUR.universalValue(100), 0);
 	}
 
+	//Test if valueInThisCurrency is ok.
 	@Test
 	public void testValueInThisCurrency() {
 		assertEquals(22.5, SEK.valueInThisCurrency(100, EUR), 0.5);
